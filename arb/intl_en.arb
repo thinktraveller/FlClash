@@ -757,6 +757,8 @@
   "installedAppsPermissionDesc": "This system hides the installed app list until the permission is granted. Authorize it to configure the per-app proxy.",
   "installedAppsPermissionDeniedMessage": "The app list permission was denied, so installed apps cannot be listed. Please grant it manually in system settings.",
   "outboundIp": "Outbound IP",
+  "outboundIpRetryCount": "Outbound IP lookup retries",
+  "outboundIpRetryCountDesc": "How many times to retry a failed lookup. Choose 0 to turn off automatic retries.",
   "ipAddress": "IP address",
   "ipQualityLevel": "Level",
   "ipQualityGood": "Good",

@@ -4398,6 +4398,18 @@ abstract class AppLocalizations {
   /// **'Outbound IP'**
   String get outboundIp;
 
+  /// No description provided for @outboundIpRetryCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Outbound IP lookup retries'**
+  String get outboundIpRetryCount;
+
+  /// No description provided for @outboundIpRetryCountDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'How many times to retry a failed lookup. Choose 0 to turn off automatic retries.'**
+  String get outboundIpRetryCountDesc;
+
   /// No description provided for @ipAddress.
   ///
   /// In en, this message translates to:

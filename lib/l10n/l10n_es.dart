@@ -2453,6 +2453,14 @@ class AppLocalizationsEs extends AppLocalizations {
   String get outboundIp => 'IP de salida';
 
   @override
+  String get outboundIpRetryCount =>
+      'Reintentos de consulta de la IP de salida';
+
+  @override
+  String get outboundIpRetryCountDesc =>
+      'Número máximo de reintentos si falla la consulta. Selecciona 0 para desactivar los reintentos automáticos.';
+
+  @override
   String get ipAddress => 'Dirección IP';
 
   @override

@@ -34,6 +34,9 @@ _AppSettingProps _$AppSettingPropsFromJson(
       RequestFeed.live,
   delayTestTimeout:
       (json['delayTestTimeout'] as num?)?.toInt() ?? defaultDelayTestTimeout,
+  outboundIpRetryCount: _outboundIpRetryCountFromJson(
+    json['outboundIpRetryCount'],
+  ),
   tabAnimation:
       $enumDecodeNullable(
         _$TabAnimationEnumMap,
@@ -112,6 +115,7 @@ Map<String, dynamic> _$AppSettingPropsToJson(_AppSettingProps instance) =>
       'closeConnections': instance.closeConnections,
       'requestFeed': _$RequestFeedEnumMap[instance.requestFeed]!,
       'delayTestTimeout': instance.delayTestTimeout,
+      'outboundIpRetryCount': instance.outboundIpRetryCount,
       'tabAnimation': _$TabAnimationEnumMap[instance.tabAnimation]!,
       'floatingNavigationBar': instance.floatingNavigationBar,
       'autoCheckUpdate': instance.autoCheckUpdate,

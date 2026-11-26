@@ -714,6 +714,8 @@
   "installedAppsPermissionDesc": "이 시스템은 권한을 허용하기 전까지 설치된 앱 목록을 숨깁니다. 앱별 프록시를 구성하려면 권한을 허용하세요.",
   "installedAppsPermissionDeniedMessage": "앱 목록 권한이 거부되어 설치된 앱을 표시할 수 없습니다. 시스템 설정에서 직접 허용해 주세요.",
   "outboundIp": "아웃바운드 IP",
+  "outboundIpRetryCount": "아웃바운드 IP 조회 재시도 횟수",
+  "outboundIpRetryCountDesc": "조회에 실패했을 때 자동으로 다시 시도할 최대 횟수입니다. 0을 선택하면 자동으로 다시 시도하지 않습니다.",
   "ipAddress": "IP 주소",
   "ipQualityLevel": "등급",
   "ipQualityGood": "양호",

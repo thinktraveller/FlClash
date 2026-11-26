@@ -2,6 +2,7 @@ import 'package:fl_clash/common/service_probe.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import 'config.dart';
 import 'core.dart';
 import 'route_state.dart';
 import 'routed_probe.dart';
@@ -15,6 +16,11 @@ class OutboundIpProbe extends _$OutboundIpProbe
     with RoutedProbe<String, IpInfo> {
   @override
   RoutedProbeState<String, IpInfo> build() => buildProbe();
+
+  @override
+  int? retryLimit(String target) => target == routedOutbound
+      ? ref.read(appSettingProvider).outboundIpRetryCount
+      : null;
 
   @override
   Future<Map<String, ProbeAnswer<IpInfo>>> probe(

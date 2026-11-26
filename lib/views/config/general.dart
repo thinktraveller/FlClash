@@ -327,9 +327,22 @@ class GeneralView extends ConsumerWidget {
     ];
   }
 
-  List<Widget> _connectionItems() {
+  List<Widget> _connectionItems(AppLocalizations appLocalizations) {
     return [
       const DelayTestTimeoutItem(),
+      ConfigOptionsItem<int?>(
+        title: (l) => l.outboundIpRetryCount,
+        subtitle: (l) => l.outboundIpRetryCountDesc,
+        options: [null, for (var i = 0; i <= maxOutboundIpRetryCount; i++) i],
+        textBuilder: (value) =>
+            value?.toString() ?? appLocalizations.defaultText,
+        selector: appSettingProvider.select(
+          (state) => state.outboundIpRetryCount,
+        ),
+        onChanged: (ref, value) => ref
+            .read(appSettingProvider.notifier)
+            .update((state) => state.copyWith(outboundIpRetryCount: value)),
+      ),
       _clashToggle(
         title: (l) => l.alwaysFindProcess,
         select: (state) => state.findProcessMode == FindProcessMode.always,
@@ -434,7 +447,7 @@ class GeneralView extends ConsumerWidget {
           ),
           generateSection(
             title: appLocalizations.connection,
-            items: _connectionItems(),
+            items: _connectionItems(appLocalizations),
           ),
           OverrideSection(
             title: appLocalizations.core,

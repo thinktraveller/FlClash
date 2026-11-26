@@ -714,6 +714,8 @@
   "installedAppsPermissionDesc": "このシステムでは、許可するまでインストール済みアプリの一覧が提供されません。許可すると、アプリごとのプロキシを設定できます。",
   "installedAppsPermissionDeniedMessage": "アプリ一覧の権限が拒否されたため、インストール済みアプリを取得できません。システム設定から手動で許可してください。",
   "outboundIp": "アウトバウンド IP",
+  "outboundIpRetryCount": "アウトバウンド IP の再試行回数",
+  "outboundIpRetryCountDesc": "IP の取得に失敗したときの再試行回数です。0 を選ぶと自動で再試行しません。",
   "ipAddress": "IP アドレス",
   "ipQualityLevel": "レベル",
   "ipQualityGood": "良好",

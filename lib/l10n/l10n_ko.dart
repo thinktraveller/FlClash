@@ -2357,6 +2357,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get outboundIp => '아웃바운드 IP';
 
   @override
+  String get outboundIpRetryCount => '아웃바운드 IP 조회 재시도 횟수';
+
+  @override
+  String get outboundIpRetryCountDesc =>
+      '조회에 실패했을 때 자동으로 다시 시도할 최대 횟수입니다. 0을 선택하면 자동으로 다시 시도하지 않습니다.';
+
+  @override
   String get ipAddress => 'IP 주소';
 
   @override

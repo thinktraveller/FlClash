@@ -2310,6 +2310,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get outboundIp => 'アウトバウンド IP';
 
   @override
+  String get outboundIpRetryCount => 'アウトバウンド IP の再試行回数';
+
+  @override
+  String get outboundIpRetryCountDesc =>
+      'IP の取得に失敗したときの再試行回数です。0 を選ぶと自動で再試行しません。';
+
+  @override
   String get ipAddress => 'IP アドレス';
 
   @override

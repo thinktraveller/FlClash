@@ -252,6 +252,13 @@ abstract class Filter with _$Filter {
   factory Filter.fromJson(Map<String, Object?> json) => _$FilterFromJson(json);
 }
 
+const maxOutboundIpRetryCount = 10;
+
+int? _outboundIpRetryCountFromJson(Object? value) =>
+    value is int && value >= 0 && value <= maxOutboundIpRetryCount
+    ? value
+    : null;
+
 @freezed
 abstract class AppSettingProps with _$AppSettingProps {
   const factory AppSettingProps({
@@ -268,6 +275,7 @@ abstract class AppSettingProps with _$AppSettingProps {
     @Default(true) bool closeConnections,
     @Default(RequestFeed.live) RequestFeed requestFeed,
     @Default(defaultDelayTestTimeout) int delayTestTimeout,
+    @JsonKey(fromJson: _outboundIpRetryCountFromJson) int? outboundIpRetryCount,
     @Default(TabAnimation.fade)
     @JsonKey(readValue: _readTabAnimation)
     TabAnimation tabAnimation,

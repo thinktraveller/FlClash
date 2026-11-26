@@ -2287,6 +2287,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get outboundIp => '出站 IP';
 
   @override
+  String get outboundIpRetryCount => '出站 IP 查询重试次数';
+
+  @override
+  String get outboundIpRetryCountDesc => '查询失败后最多重试的次数。选择 0 可关闭自动重试。';
+
+  @override
   String get ipAddress => 'IP 地址';
 
   @override

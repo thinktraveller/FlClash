@@ -91,6 +91,7 @@ mixin RoutedProbe<K, V>
   final Map<K, _Landing<V>> _landed = {};
   final Map<K, Timer> _cooling = {};
   final Map<K, List<RouteHit>> _failures = {};
+  final Map<K, int> _retryCounts = {};
   final Map<K, Timer> _retries = {};
   final Map<K, int> _launchPicks = {};
   bool _scheduled = false;
@@ -119,6 +120,10 @@ mixin RoutedProbe<K, V>
 
   @protected
   Duration get confirmDelay => probeConfirmDelay;
+
+  /// Null keeps the single confirmation of an early failure on the same exit.
+  @protected
+  int? retryLimit(K target) => null;
 
   @protected
   Future<RouteCheck> checkRoutes(List<List<RouteHit>> routes) => ref
@@ -178,6 +183,7 @@ mixin RoutedProbe<K, V>
     }
     _watchers.remove(target);
     _failures.remove(target);
+    _retryCounts.remove(target);
     _launchPicks.remove(target);
     final retry = _retries.remove(target);
     retry?.cancel();
@@ -212,6 +218,11 @@ mixin RoutedProbe<K, V>
   /// the answer lands in the cache and stays until the route moves.
   void refresh(Iterable<K> targets) {
     for (final target in targets) {
+      if (!_inFlight.containsKey(target) && retryLimit(target) != null) {
+        _forgetFailures(target);
+        _landed.remove(target);
+        _unverified.remove(target);
+      }
       _mark(target, keepValue: true, forced: true);
     }
   }
@@ -407,11 +418,24 @@ mixin RoutedProbe<K, V>
     _retries.remove(target)?.cancel();
     if (entry.phase != ProbePhase.failed) {
       _failures.remove(target);
+      _retryCounts.remove(target);
       entries[target] = entry;
       return;
     }
     if (!_watchers.containsKey(target)) {
       entries[target] = entry;
+      return;
+    }
+    final limit = retryLimit(target);
+    if (limit != null) {
+      final retries = _retryCounts[target] ?? 0;
+      if (retries >= limit) {
+        _retryCounts.remove(target);
+        entries[target] = entry;
+      } else {
+        _retryCounts[target] = retries + 1;
+        _retries[target] = Timer(confirmDelay, () => _retry(target));
+      }
       return;
     }
     final previous = _failures[target];
@@ -444,6 +468,7 @@ mixin RoutedProbe<K, V>
 
   void _forgetFailures(K target) {
     _failures.remove(target);
+    _retryCounts.remove(target);
     _retries.remove(target)?.cancel();
   }
 
@@ -465,6 +490,11 @@ mixin RoutedProbe<K, V>
         (next.coreEpoch != previous.coreEpoch ||
             next.hostEpoch != previous.hostEpoch ||
             next.proxied != previous.proxied);
+    if (moved || picked) {
+      for (final target in [..._retryCounts.keys]) {
+        _invalidate(target, entries);
+      }
+    }
     for (final MapEntry(key: target, value: landed) in {..._landed}.entries) {
       if (next.hasMovedSince(landed.entry.stamp!)) {
         _invalidate(target, entries);
@@ -486,6 +516,9 @@ mixin RoutedProbe<K, V>
       for (final target in {..._retries.keys, ..._inFlight.keys, ...failed}) {
         if (_watchers.containsKey(target)) {
           _forgetFailures(target);
+          if (retryLimit(target) != null) {
+            _inFlight.remove(target);
+          }
           _due[target] = (
             keepValue: true,
             forced: false,
@@ -651,6 +684,9 @@ mixin RoutedProbe<K, V>
     _landed.remove(target);
     _unverified.remove(target);
     _forgetFailures(target);
+    if (retryLimit(target) != null) {
+      _inFlight.remove(target);
+    }
     if (_watchers.containsKey(target)) {
       entries[target] = ProbeEntry(phase: ProbePhase.probing);
       _due[target] = (

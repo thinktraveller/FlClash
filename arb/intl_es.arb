@@ -714,6 +714,8 @@
   "installedAppsPermissionDesc": "Este sistema oculta la lista de apps instaladas hasta que se concede el permiso. Autorízalo para configurar el proxy por app.",
   "installedAppsPermissionDeniedMessage": "Se denegó el permiso de lista de apps, por lo que no se pueden mostrar las apps instaladas. Concédelo manualmente en los ajustes del sistema.",
   "outboundIp": "IP de salida",
+  "outboundIpRetryCount": "Reintentos de consulta de la IP de salida",
+  "outboundIpRetryCountDesc": "Número máximo de reintentos si falla la consulta. Selecciona 0 para desactivar los reintentos automáticos.",
   "ipAddress": "Dirección IP",
   "ipQualityLevel": "Nivel",
   "ipQualityGood": "Buena",

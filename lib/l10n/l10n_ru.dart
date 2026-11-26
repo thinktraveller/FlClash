@@ -2431,6 +2431,13 @@ class AppLocalizationsRu extends AppLocalizations {
   String get outboundIp => 'Исходящий IP';
 
   @override
+  String get outboundIpRetryCount => 'Повторные попытки проверки исходящего IP';
+
+  @override
+  String get outboundIpRetryCountDesc =>
+      'Максимальное число повторных попыток при неудачной проверке. Выберите 0, чтобы отключить автоматические повторы.';
+
+  @override
   String get ipAddress => 'IP-адрес';
 
   @override

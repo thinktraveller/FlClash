@@ -2453,6 +2453,14 @@ class AppLocalizationsFr extends AppLocalizations {
   String get outboundIp => 'IP sortante';
 
   @override
+  String get outboundIpRetryCount =>
+      'Nouvelles tentatives de recherche de l’IP sortante';
+
+  @override
+  String get outboundIpRetryCountDesc =>
+      'Nombre maximal de nouvelles tentatives en cas d’échec. Sélectionnez 0 pour désactiver les nouvelles tentatives automatiques.';
+
+  @override
   String get ipAddress => 'Adresse IP';
 
   @override

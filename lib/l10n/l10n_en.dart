@@ -2421,6 +2421,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get outboundIp => 'Outbound IP';
 
   @override
+  String get outboundIpRetryCount => 'Outbound IP lookup retries';
+
+  @override
+  String get outboundIpRetryCountDesc =>
+      'How many times to retry a failed lookup. Choose 0 to turn off automatic retries.';
+
+  @override
   String get ipAddress => 'IP address';
 
   @override

@@ -714,6 +714,8 @@
   "installedAppsPermissionDesc": "Ce système masque la liste des apps installées tant que l’autorisation n’est pas accordée. Accordez-la pour configurer le proxy par app.",
   "installedAppsPermissionDeniedMessage": "L’autorisation de la liste des apps a été refusée ; les apps installées ne peuvent donc pas être listées. Veuillez l’accorder manuellement dans les réglages du système.",
   "outboundIp": "IP sortante",
+  "outboundIpRetryCount": "Nouvelles tentatives de recherche de l’IP sortante",
+  "outboundIpRetryCountDesc": "Nombre maximal de nouvelles tentatives en cas d’échec. Sélectionnez 0 pour désactiver les nouvelles tentatives automatiques.",
   "ipAddress": "Adresse IP",
   "ipQualityLevel": "Niveau",
   "ipQualityGood": "Bonne",
